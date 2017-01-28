@@ -8,7 +8,15 @@ class MainWindow(QtGui.QMainWindow):
         super(MainWindow, self).__init__()
         self.setGeometry(100, 100, 350, 250)
         self.setWindowTitle("Ubuntu Statup")
+        self.home()
+
+    def home(self):
+        checkBox = QtGui.QCheckBox("InkScape", self)
+        checkBox.move(50, 50)
+        checkBox.stateChanged.connect(self.include_program)
         self.show()
+
+
 
 
 def run():
