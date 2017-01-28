@@ -12,10 +12,15 @@ class PassWindow(QtGui.QDialog):
 
     def home(self):
         self.label = QtGui.QLabel("Please, type your password")
-        self.lineedit = QtGui.QLineEdit("your password here")
-        self.lineedit.selectAll()
+        self.lineedit = QtGui.QLineEdit(self)
+        self.lineedit.setFocus()
+        self.lineedit.setEchoMode(QtGui.QLineEdit.Password)
+
         self.btnOk = QtGui.QPushButton("OK")
+        self.btnOk.clicked.connect(self.show_result)
+
         self.btnCancel = QtGui.QPushButton("Cancel")
+        self.btnCancel.clicked.connect(self.exit)
 
         layout = QtGui.QVBoxLayout()
         layout.addWidget(self.label)
@@ -23,11 +28,6 @@ class PassWindow(QtGui.QDialog):
         layout.addWidget(self.btnOk)
         layout.addWidget(self.btnCancel)
         self.setLayout(layout)
-
-        self.lineedit.setFocus()
-
-        self.btnOk.clicked.connect(self.show_result)
-        self.btnCancel.clicked.connect(self.exit)
 
         self.show()
 
