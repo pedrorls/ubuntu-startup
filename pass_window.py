@@ -1,7 +1,9 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from PyQt4 import QtGui, QtCore
+from subprocess import Popen, PIPE
 import sys
-import os
-import getpass
+import time
 
 
 class PassWindow(QtGui.QDialog):
@@ -12,7 +14,7 @@ class PassWindow(QtGui.QDialog):
 
     def home(self):
         self.label = QtGui.QLabel("Please, type your password")
-        self.lineedit = QtGui.QLineEdit(self)
+        self.lineedit = QtGui.QLineEdit("KwSagitarii+11")
         self.lineedit.setFocus()
         self.lineedit.setEchoMode(QtGui.QLineEdit.Password)
 
@@ -22,17 +24,20 @@ class PassWindow(QtGui.QDialog):
         self.btnCancel = QtGui.QPushButton("Cancel")
         self.btnCancel.clicked.connect(self.exit)
 
-        layout = QtGui.QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.lineedit)
-        layout.addWidget(self.btnOk)
-        layout.addWidget(self.btnCancel)
-        self.setLayout(layout)
+        layoutH = QtGui.QHBoxLayout()
+        layoutH.addWidget(self.btnOk)
+        layoutH.addWidget(self.btnCancel)
+
+        layoutV = QtGui.QVBoxLayout()
+        layoutV.addWidget(self.label)
+        layoutV.addWidget(self.lineedit)
+        layoutV.addLayout(layoutH)
+        self.setLayout(layoutV)
 
         self.show()
 
     def show_result(self):
-        print(self.lineedit.text())
+        pass
 
     def exit(self):
         sys.exit()

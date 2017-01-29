@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from PyQt4 import QtGui, QtCore
 import sys
 import os
@@ -16,7 +18,14 @@ class MainWindow(QtGui.QMainWindow):
         checkBox.stateChanged.connect(self.include_program)
         self.show()
 
-
+    def include_program(self, state):
+        if state == QtCore.Qt.Checked:
+            os.system(
+                """sudo add-apt-repository ppa:inkscape.dev/stable -y &&
+                sudo apt-get update && sudo apt-get install inkscape -y"""
+                )
+        else:
+            pass
 
 
 def run():
