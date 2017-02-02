@@ -185,6 +185,8 @@ class Ui_MainWindow(object):
                 _fromUtf8("clicked(bool)")), MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.checkBox.stateChanged.connect(self.include_program)
+
     def retranslateUi(self, MainWindow):
         self.label_3.setText(_translate("MainWindow", "Ubuntu", None))
         self.label_4.setText(_translate("MainWindow", "Startup", None))
@@ -195,3 +197,22 @@ class Ui_MainWindow(object):
         self.checkBox_2.setText(_translate("MainWindow", "Atom", None))
         self.checkBox_3.setText(_translate("MainWindow", "PyCharm", None))
         self.label_2.setText(_translate("MainWindow", "Commom", None))
+
+    def include_program(self, state):
+        if state == QtCore.Qt.Checked:
+            print(self.checkBox.text())
+        else:
+            pass
+
+
+def run():
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    win = QtGui.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(win)
+    win.show()
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    run()
