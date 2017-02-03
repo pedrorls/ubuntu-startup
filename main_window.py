@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ubuntu_startup.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
+# Created by: Pedro Rodrigues Lima da Silva
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -44,7 +42,7 @@ class Ui_MainWindow(object):
                 "border-radius: 10px;\n"
                 "}\n"
                 "\n"
-                "QGroupBox {\n"
+                "QListView {\n"
                 "    background-color: rgb(172,172,172);\n"
                 "    border-radius: 10px;\n"
                 "};\n"
@@ -128,25 +126,6 @@ class Ui_MainWindow(object):
         self.label.setWordWrap(True)
         self.label.setObjectName(_fromUtf8("label"))
         self.verticalLayout.addWidget(self.label)
-        self.groupBox = QtGui.QGroupBox(self.widget1)
-        self.groupBox.setTitle(_fromUtf8(""))
-        self.groupBox.setAlignment(QtCore.Qt.AlignCenter)
-        self.groupBox.setObjectName(_fromUtf8("groupBox"))
-        self.widget2 = QtGui.QWidget(self.groupBox)
-        self.widget2.setGeometry(QtCore.QRect(10, 20, 105, 80))
-        self.widget2.setObjectName(_fromUtf8("widget2"))
-        self.verticalLayout_3 = QtGui.QVBoxLayout(self.widget2)
-        self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
-        self.checkBox = QtGui.QCheckBox(self.widget2)
-        self.checkBox.setObjectName(_fromUtf8("checkBox"))
-        self.verticalLayout_3.addWidget(self.checkBox)
-        self.checkBox_2 = QtGui.QCheckBox(self.widget2)
-        self.checkBox_2.setObjectName(_fromUtf8("checkBox_2"))
-        self.verticalLayout_3.addWidget(self.checkBox_2)
-        self.checkBox_3 = QtGui.QCheckBox(self.widget2)
-        self.checkBox_3.setObjectName(_fromUtf8("checkBox_3"))
-        self.verticalLayout_3.addWidget(self.checkBox_3)
-        self.verticalLayout.addWidget(self.groupBox)
         self.horizontalLayout_2.addLayout(self.verticalLayout)
         self.verticalLayout_2 = QtGui.QVBoxLayout()
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
@@ -160,21 +139,11 @@ class Ui_MainWindow(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.verticalLayout_2.addWidget(self.label_2)
-        self.groupBox_2 = QtGui.QGroupBox(self.widget1)
-        font = QtGui.QFont()
-        font.setBold(False)
-        font.setWeight(50)
-        self.groupBox_2.setFont(font)
-        self.groupBox_2.setTitle(_fromUtf8(""))
-        self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
-        self.verticalLayout_2.addWidget(self.groupBox_2)
+
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
-        self.groupBox.raise_()
-        self.groupBox_2.raise_()
         self.label_2.raise_()
         self.label.raise_()
-        self.groupBox.raise_()
-        self.groupBox_2.raise_()
+
         self.label_3.raise_()
         self.label_4.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
@@ -184,8 +153,12 @@ class Ui_MainWindow(object):
             self.cancelBtn, QtCore.SIGNAL(
                 _fromUtf8("clicked(bool)")), MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-        self.checkBox.stateChanged.connect(self.include_program)
+        self.checkItemsDeveloper = [
+            "PyCharm", "Sublime Text", "Android IDE", "Atom"]
+        self.checkItemsCommom = [
+            "VLC", "Chrome", "PopCornTime", "LibreOffice"]
+        self.lst_boxes_Developer()
+        self.lst_boxes_Commom()
 
     def retranslateUi(self, MainWindow):
         self.label_3.setText(_translate("MainWindow", "Ubuntu", None))
@@ -193,9 +166,6 @@ class Ui_MainWindow(object):
         self.installBtn.setText(_translate("MainWindow", "Install", None))
         self.cancelBtn.setText(_translate("MainWindow", "Cancel", None))
         self.label.setText(_translate("MainWindow", "Developer", None))
-        self.checkBox.setText(_translate("MainWindow", "Sublime Text", None))
-        self.checkBox_2.setText(_translate("MainWindow", "Atom", None))
-        self.checkBox_3.setText(_translate("MainWindow", "PyCharm", None))
         self.label_2.setText(_translate("MainWindow", "Commom", None))
 
     def include_program(self, state):
@@ -203,6 +173,34 @@ class Ui_MainWindow(object):
             print(self.checkBox.text())
         else:
             pass
+
+    def lst_boxes_Developer(self):
+        self.listView = QtGui.QListView(parent=None)
+        model = QtGui.QStandardItemModel()
+        for checkItem in self.checkItemsDeveloper:
+            item = QtGui.QStandardItem()
+            item.setText(checkItem)
+            item.setCheckable(True)
+            item.setSelectable(False)
+            item.setEditable(False)
+            model.appendRow(item)
+        self.listView.setModel(model)
+        self.listView.clicked.connect(self.include_program)
+        self.verticalLayout.addWidget(self.listView)
+
+    def lst_boxes_Commom(self):
+        self.listView = QtGui.QListView(parent=None)
+        model = QtGui.QStandardItemModel()
+        for checkItem in self.checkItemsCommom:
+            item = QtGui.QStandardItem()
+            item.setText(checkItem)
+            item.setCheckable(True)
+            item.setSelectable(False)
+            item.setEditable(False)
+            model.appendRow(item)
+        self.listView.setModel(model)
+        self.listView.clicked.connect(self.include_program)
+        self.verticalLayout_2.addWidget(self.listView)
 
 
 def run():
