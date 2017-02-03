@@ -168,9 +168,9 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Developer", None))
         self.label_2.setText(_translate("MainWindow", "Commom", None))
 
-    def include_program(self, state):
-        if state == QtCore.Qt.Checked:
-            print(self.checkBox.text())
+    def include_program(self, item):
+        if item.checkState:
+            print(item.text())
         else:
             pass
 
@@ -184,8 +184,8 @@ class Ui_MainWindow(object):
             item.setSelectable(False)
             item.setEditable(False)
             model.appendRow(item)
+        model.itemChanged.connect(self.include_program)
         self.listView.setModel(model)
-        self.listView.clicked.connect(self.include_program)
         self.verticalLayout.addWidget(self.listView)
 
     def lst_boxes_Commom(self):
@@ -198,8 +198,8 @@ class Ui_MainWindow(object):
             item.setSelectable(False)
             item.setEditable(False)
             model.appendRow(item)
+        model.itemChanged.connect(self.include_program)
         self.listView.setModel(model)
-        self.listView.clicked.connect(self.include_program)
         self.verticalLayout_2.addWidget(self.listView)
 
 
