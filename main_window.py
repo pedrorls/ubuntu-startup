@@ -5,6 +5,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+import sys
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -149,16 +150,13 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        QtCore.QObject.connect(
-            self.cancelBtn, QtCore.SIGNAL(
-                _fromUtf8("clicked(bool)")), MainWindow.close)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.cancelBtn.clicked.connect(self.close)
         self.checkItemsDeveloper = [
             "PyCharm", "Sublime Text", "Android IDE", "Atom"]
         self.checkItemsCommom = [
             "VLC", "Chrome", "PopCornTime", "LibreOffice"]
-        self.lst_boxes_Developer()
-        self.lst_boxes_Commom()
+        self.__lst_boxes_Developer()
+        self.__lst_boxes_Commom()
 
     def retranslateUi(self, MainWindow):
         self.label_3.setText(_translate("MainWindow", "Ubuntu", None))
@@ -168,13 +166,13 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Developer", None))
         self.label_2.setText(_translate("MainWindow", "Commom", None))
 
-    def include_program(self, item):
+    def __include_program(self, item):
         if item.checkState:
             print(item.text())
         else:
             pass
 
-    def lst_boxes_Developer(self):
+    def __lst_boxes_Developer(self):
         self.listView = QtGui.QListView(parent=None)
         model = QtGui.QStandardItemModel()
         for checkItem in self.checkItemsDeveloper:
@@ -184,11 +182,11 @@ class Ui_MainWindow(object):
             item.setSelectable(False)
             item.setEditable(False)
             model.appendRow(item)
-        model.itemChanged.connect(self.include_program)
+        model.itemChanged.connect(self.__include_program)
         self.listView.setModel(model)
         self.verticalLayout.addWidget(self.listView)
 
-    def lst_boxes_Commom(self):
+    def __lst_boxes_Commom(self):
         self.listView = QtGui.QListView(parent=None)
         model = QtGui.QStandardItemModel()
         for checkItem in self.checkItemsCommom:
@@ -198,13 +196,26 @@ class Ui_MainWindow(object):
             item.setSelectable(False)
             item.setEditable(False)
             model.appendRow(item)
-        model.itemChanged.connect(self.include_program)
+        model.itemChanged.connect(self.__include_program)
         self.listView.setModel(model)
         self.verticalLayout_2.addWidget(self.listView)
 
+    def close(self):
+        choice = QtGui.QMessageBox.question(
+            None,
+            "Exit", "Are you sure?!",
+            QtGui.QMessageBox.Yes,
+            QtGui.QMessageBox.No
+        )
+        if choice == QtGui.QMessageBox.Yes:
+            print("Closing the application ...")
+            sys.exit()
+        else:
+            pass
+
 
 def run():
-    import sys
+
     app = QtGui.QApplication(sys.argv)
     win = QtGui.QMainWindow()
     ui = Ui_MainWindow()
