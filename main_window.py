@@ -5,6 +5,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from developer import developer
 import sys
 
 try:
@@ -151,10 +152,10 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.cancelBtn.clicked.connect(self.close)
-        self.checkItemsDeveloper = [
-            "PyCharm", "Sublime Text", "Android IDE", "Atom"]
+        self.installBtn.clicked.connect(self.__install_programs)
+        self.__selected_programs = []
         self.checkItemsCommom = [
-            "VLC", "Chrome", "PopCornTime", "LibreOffice"]
+            "PyCharm", "Sublime Text", "Android IDE", "Atom"]
         self.__lst_boxes_Developer()
         self.__lst_boxes_Commom()
 
@@ -167,17 +168,17 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Commom", None))
 
     def __include_program(self, item):
-        if item.checkState:
-            print(item.text())
+        if item.checkState() == 2:
+            self.__selected_programs.append(item.text())
         else:
-            pass
+            self.__selected_programs.remove(item.text())
 
     def __lst_boxes_Developer(self):
         self.listView = QtGui.QListView(parent=None)
         model = QtGui.QStandardItemModel()
-        for checkItem in self.checkItemsDeveloper:
+        for key in developer.keys():
             item = QtGui.QStandardItem()
-            item.setText(checkItem)
+            item.setText(key)
             item.setCheckable(True)
             item.setSelectable(False)
             item.setEditable(False)
@@ -200,6 +201,8 @@ class Ui_MainWindow(object):
         self.listView.setModel(model)
         self.verticalLayout_2.addWidget(self.listView)
 
+
+
     def close(self):
         choice = QtGui.QMessageBox.question(
             None,
@@ -208,7 +211,6 @@ class Ui_MainWindow(object):
             QtGui.QMessageBox.No
         )
         if choice == QtGui.QMessageBox.Yes:
-            print("Closing the application ...")
             sys.exit()
         else:
             pass
