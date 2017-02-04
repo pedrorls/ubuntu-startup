@@ -201,7 +201,9 @@ class Ui_MainWindow(object):
         self.listView.setModel(model)
         self.verticalLayout_2.addWidget(self.listView)
 
-
+    def __install_programs(self, lst):
+        for program in self.__selected_programs:
+            print(developer[str(program)])
 
     def close(self):
         choice = QtGui.QMessageBox.question(
