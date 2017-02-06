@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>550</width>
+    <height>500</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
@@ -27,8 +35,7 @@
    <double>1.000000000000000</double>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -81,16 +88,29 @@ background-color: rgb(242, 242, 242);</string>
      <string>Startup</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>18</x>
       <y>430</y>
-      <width>209</width>
-      <height>60</height>
+      <width>521</width>
+      <height>62</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(236, 236, 236);</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QPushButton" name="installBtn">
        <property name="sizePolicy">
@@ -98,6 +118,12 @@ background-color: rgb(242, 242, 242);</string>
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
        </property>
        <property name="font">
         <font>
@@ -127,6 +153,12 @@ background-color: rgb(242, 242, 242);</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Roboto</family>
@@ -146,7 +178,7 @@ background-color: rgb(242, 242, 242);</string>
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -192,7 +224,7 @@ background-color: rgb(242, 242, 242);</string>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -269,21 +301,24 @@ background-color: rgb(242, 242, 242);</string>
      </item>
     </layout>
    </widget>
-   <zorder>listWidget</zorder>
-   <zorder>verticalScrollBar</zorder>
-   <zorder>verticalScrollBar</zorder>
-   <zorder>listView</zorder>
-   <zorder>listView_2</zorder>
-   <zorder>mdiArea</zorder>
-   <zorder>mdiArea_2</zorder>
-   <zorder>groupBox</zorder>
-   <zorder>groupBox_2</zorder>
-   <zorder>label_2</zorder>
-   <zorder>label</zorder>
-   <zorder>groupBox</zorder>
-   <zorder>groupBox_2</zorder>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>410</y>
+      <width>301</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
+   <zorder>label_5</zorder>
   </widget>
  </widget>
  <tabstops>
@@ -291,22 +326,5 @@ background-color: rgb(242, 242, 242);</string>
   <tabstop>cancelBtn</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>cancelBtn</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>482</x>
-     <y>464</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>540</x>
-     <y>493</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
