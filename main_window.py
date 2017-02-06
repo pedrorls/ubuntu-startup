@@ -7,6 +7,7 @@
 from PyQt4 import QtCore, QtGui
 from developer import developer
 import sys
+import os
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -49,6 +50,7 @@ class Ui_MainWindow(object):
                 "    border-radius: 10px;\n"
                 "};\n"
                 "\n"
+                "Q"
                 "background-color: rgb(242, 242, 242);")
             )
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
@@ -67,18 +69,15 @@ class Ui_MainWindow(object):
         self.label_4.setFont(font)
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.widget = QtGui.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(330, 430, 209, 60))
+        self.widget.setGeometry(QtCore.QRect(30, 430, 500, 60))
         self.widget.setObjectName(_fromUtf8("widget"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.terminal_response_box = QtGui.QTextEdit(self.widget)
+        self.terminal_response_box.setGeometry(QtCore.QRect(1, 1, 307, 60))
+        self.horizontalLayout.addWidget(self.terminal_response_box)
         self.installBtn = QtGui.QPushButton(self.widget)
-        sizePolicy = QtGui.QSizePolicy(
-            QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.installBtn.sizePolicy().hasHeightForWidth())
-        self.installBtn.setSizePolicy(sizePolicy)
+        self.installBtn.setMinimumSize(100, 50)
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Roboto"))
         font.setPointSize(12)
@@ -92,13 +91,7 @@ class Ui_MainWindow(object):
         self.installBtn.setObjectName(_fromUtf8("installBtn"))
         self.horizontalLayout.addWidget(self.installBtn)
         self.cancelBtn = QtGui.QPushButton(self.widget)
-        sizePolicy = QtGui.QSizePolicy(
-            QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.cancelBtn.sizePolicy().hasHeightForWidth())
-        self.cancelBtn.setSizePolicy(sizePolicy)
+        self.cancelBtn.setMinimumSize(100, 50)
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Roboto"))
         font.setPointSize(12)
@@ -202,8 +195,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.listView)
 
     def __install_programs(self, lst):
-        for program in self.__selected_programs:
-            print(developer[str(program)])
+        for idx, program in enumerate(self.__selected_programs):
+            print("Installing "+str(program)+"...")
+            print(str(idx)+" of "+str(len(self.__selected_programs)))
+            os.system(developer[str(program)])
+            print(str(program) + " installed")
 
     def close(self):
         choice = QtGui.QMessageBox.question(
