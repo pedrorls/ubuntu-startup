@@ -206,11 +206,14 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.listView)
 
     def __install_programs(self):
-        self.label_5.setText("Installing the selected programs...")
-        for program in self.__selected_programs:
-            self.label_5.setText(str(program) + ": installing")
-            os.system(developer[str(program)])
-            self.label_5.setText(str(program) + ": installed")
+        if self.__selected_programs:
+            self.label_5.setText("Installing the selected programs...")
+            for program in self.__selected_programs:
+                self.label_5.setText(str(program) + ": installing")
+                os.system(developer[str(program)])
+                self.label_5.setText(str(program) + ": installed")
+        else:
+            self.label_5.setText("Please, select a program first")
 
     def close(self):
         choice = QtGui.QMessageBox.question(
