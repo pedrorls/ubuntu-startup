@@ -143,7 +143,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
         self.label_5 = QtGui.QTextEdit(
             "Select some programs!", self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(40, 410, 290, 20))
+        self.label_5.setGeometry(QtCore.QRect(40, 410, 250, 20))
         self.label_5.setReadOnly(True)
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.label_2.raise_()
