@@ -209,7 +209,7 @@ class Ui_MainWindow(object):
             )
         for program in self.__selected_programs:
             cmd = developer[str(program)]
-            out = os.popen4(cmd)[0].read()
+            out = os.popen4(cmd)[1].read()
             self.terminal_response_box.setText(out)
             self.label_5.setText(
                 str(program) + " installed"
@@ -226,16 +226,3 @@ class Ui_MainWindow(object):
             sys.exit()
         else:
             pass
-
-
-def run():
-
-    app = QtGui.QApplication(sys.argv)
-    win = QtGui.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(win)
-    win.show()
-    sys.exit(app.exec_())
-
-if __name__ == "__main__":
-    run()
