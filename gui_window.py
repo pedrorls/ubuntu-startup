@@ -73,13 +73,13 @@ class Ui_MainWindow(object):
         self.widget.setObjectName(_fromUtf8("widget"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.terminal_response_box = QtGui.QTextEdit(self.widget)
-        self.terminal_response_box.setGeometry(QtCore.QRect(1, 10, 300, 50))
-        self.terminal_response_box.setReadOnly(True)
-        self.terminal_response_box.setStyleSheet(_fromUtf8(
-            "background-color: rgb(236, 236, 236);"
-        ))
-        self.horizontalLayout.addWidget(self.terminal_response_box)
+        # self.terminal_response_box = QtGui.QTextEdit(self.widget)
+        # self.terminal_response_box.setGeometry(QtCore.QRect(1, 10, 300, 50))
+        # self.terminal_response_box.setReadOnly(True)
+        # self.terminal_response_box.setStyleSheet(_fromUtf8(
+        #     "background-color: rgb(236, 236, 236);"
+        # ))
+        # self.horizontalLayout.addWidget(self.terminal_response_box)
         self.installBtn = QtGui.QPushButton(self.widget)
         self.installBtn.setMinimumSize(100, 50)
         font = QtGui.QFont()
@@ -141,8 +141,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.label_2)
 
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
-        self.label_5 = QtGui.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(40, 420, 301, 17))
+        self.label_5 = QtGui.QTextEdit(
+            "Select some programs!", self.centralwidget)
+        self.label_5.setGeometry(QtCore.QRect(40, 410, 290, 20))
+        self.label_5.setReadOnly(True)
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.label_2.raise_()
         self.label.raise_()
@@ -203,17 +205,12 @@ class Ui_MainWindow(object):
         self.listView.setModel(model)
         self.verticalLayout_2.addWidget(self.listView)
 
-    def __install_programs(self, lst):
-        self.label_5.setText(
-            "Installing the selected programs..."
-            )
+    def __install_programs(self):
+        self.label_5.setText("Installing the selected programs...")
         for program in self.__selected_programs:
-            cmd = developer[str(program)]
-            out = os.popen4(cmd)[1].read()
-            self.terminal_response_box.setText(out)
-            self.label_5.setText(
-                str(program) + " installed"
-                )
+            self.label_5.setText(str(program) + ": installing")
+            os.system(developer[str(program)])
+            self.label_5.setText(str(program) + ": installed")
 
     def close(self):
         choice = QtGui.QMessageBox.question(
