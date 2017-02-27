@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-
 # Created by: Pedro Rodrigues Lima da Silva
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 from developer import developer
+from common import common
 import sys
 import os
 
@@ -141,26 +141,17 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.label_2)
 
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
-        self.label_5 = QtGui.QTextEdit(
-            "Select some programs!", self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(40, 410, 250, 20))
-        self.label_5.setReadOnly(True)
-        self.label_5.setObjectName(_fromUtf8("label_5"))
-        self.label_5.setText("Please, open a terminal")
         self.label_2.raise_()
         self.label.raise_()
 
         self.label_3.raise_()
         self.label_4.raise_()
-        self.label_5.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         self.cancelBtn.clicked.connect(self.close)
         self.installBtn.clicked.connect(self.__install_programs)
         self.__selected_programs = []
-        self.checkItemsCommom = [
-            "PyCharm", "Sublime Text", "Android IDE", "Atom"]
         self.__lst_boxes_Developer()
         self.__lst_boxes_Commom()
 
@@ -195,9 +186,9 @@ class Ui_MainWindow(object):
     def __lst_boxes_Commom(self):
         self.listView = QtGui.QListView(parent=None)
         model = QtGui.QStandardItemModel()
-        for checkItem in self.checkItemsCommom:
+        for key in common.keys():
             item = QtGui.QStandardItem()
-            item.setText(checkItem)
+            item.setText(key)
             item.setCheckable(True)
             item.setSelectable(False)
             item.setEditable(False)
